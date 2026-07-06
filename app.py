@@ -16,87 +16,80 @@ st.set_page_config(
 )
 
 # ============================================================
-# CSS (DARK MEDICAL INTELLIGENCE — TEAL + DARK)
+# CSS (EDITORIAL PAPER — MINIMAL CASUAL)
 # ============================================================
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
 
-/* ─── FONDO OSCURO TÉCNICO ─── */
+/* ─── FONDO CÁLIDO MINIMAL ─── */
 html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"] {
-    background: #060b18 !important;
-    font-family: 'JetBrains Mono', monospace;
-    color: #e2e8f0;
+    background: #f4f3ef !important;
+    font-family: 'DM Sans', sans-serif;
+    color: #1c1917;
 }
 
 [data-testid="stAppViewContainer"] {
-    background:
-        radial-gradient(ellipse 80% 50% at 50% -5%, rgba(0,212,170,0.10) 0%, transparent 60%),
-        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,212,170,0.035) 39px, rgba(0,212,170,0.035) 40px),
-        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,212,170,0.035) 39px, rgba(0,212,170,0.035) 40px),
-        #060b18 !important;
+    background: #f4f3ef !important;
 }
 
 /* ─── TÍTULO ─── */
 .main-title {
     text-align: center;
-    color: #00d4aa;
-    font-family: 'Syne', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 0.3rem;
-    text-shadow: 0 0 40px rgba(0,212,170,0.45);
+    color: #1c1917;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.2rem;
+    text-shadow: none;
 }
 
 .deco-line {
-    width: 50px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #00d4aa, transparent);
-    margin: 0.6rem auto;
+    width: 32px;
+    height: 1px;
+    background: #b45309;
+    margin: 0.7rem auto;
+    opacity: 0.5;
 }
 
 .subtitle {
     text-align: center;
-    color: rgba(0,212,170,0.5);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
+    color: #a8a29e;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
     font-weight: 400;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     margin-bottom: 2.5rem;
 }
 
 .description {
     text-align: center;
-    color: rgba(226,232,240,0.6);
-    font-size: 0.9rem;
+    color: #78716c;
+    font-size: 0.95rem;
     margin-bottom: 2.5rem;
 }
 
 /* ─── TÍTULO "DATOS DEL CLIENTE" ─── */
 .form-title-outside {
-    color: rgba(0,212,170,0.9);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    font-weight: 600;
-    margin-bottom: 0.8rem;
+    color: #78716c;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-bottom: 0.6rem;
     text-align: left;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    border-left: 2px solid #00d4aa;
-    padding-left: 0.75rem;
 }
 
 /* ─── CUADRO DEL FORMULARIO ─── */
 .form-card {
-    background: rgba(8, 15, 32, 0.85);
+    background: #ffffff;
     padding: 2.5rem;
-    border-radius: 4px;
-    box-shadow: 0 0 0 1px rgba(0,212,170,0.15), 0 24px 80px rgba(0,0,0,0.6);
-    border: 1px solid rgba(0,212,170,0.2);
-    backdrop-filter: blur(20px);
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+    border: 1px solid #e8e6e1;
     margin-bottom: 2rem;
 }
 
@@ -110,11 +103,11 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"] {
 [data-testid="stNumberInput"] label,
 [data-testid="stRadio"] label,
 [data-testid="stSelectbox"] label {
-    color: rgba(0,212,170,0.85) !important;
-    font-family: 'JetBrains Mono', monospace !important;
-    font-weight: 600 !important;
-    font-size: 0.70rem !important;
-    letter-spacing: 0.15em !important;
+    color: #57534e !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.04em !important;
     text-transform: uppercase !important;
 }
 
@@ -123,78 +116,79 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"] {
 .stRadio [data-testid="stMarkdownContainer"] p,
 .stRadio span[data-baseweb="radio"] div,
 .stRadio div[role="radio"] {
-    color: #cbd5e1 !important;
-    font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.85rem !important;
+    color: #44403c !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.9rem !important;
+    font-weight: 400 !important;
 }
 
 /* Opciones del selectbox */
 .stSelectbox [data-testid="stMarkdownContainer"] p,
 .stSelectbox div[data-baseweb="select"] span {
-    color: #cbd5e1 !important;
-    font-family: 'JetBrains Mono', monospace !important;
+    color: #44403c !important;
+    font-family: 'DM Sans', sans-serif !important;
 }
 
 /* Input numbers */
 .stNumberInput input {
-    color: #00d4aa !important;
-    font-family: 'JetBrains Mono', monospace !important;
-    font-weight: 600 !important;
-    background: rgba(0,212,170,0.04) !important;
-    border: 1px solid rgba(0,212,170,0.3) !important;
-    border-radius: 2px !important;
+    color: #1c1917 !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 500 !important;
+    background: #fafaf9 !important;
+    border: 1px solid #d6d3cd !important;
+    border-radius: 6px !important;
 }
 
 .stNumberInput input:focus {
-    border-color: #00d4aa !important;
-    box-shadow: 0 0 0 2px rgba(0,212,170,0.12) !important;
+    border-color: #b45309 !important;
+    box-shadow: 0 0 0 3px rgba(180,83,9,0.08) !important;
 }
 
 .stNumberInput input::placeholder {
-    color: rgba(226,232,240,0.25) !important;
+    color: #a8a29e !important;
 }
 
 /* Selectbox container */
 div[data-baseweb="select"] > div {
-    background: rgba(0,212,170,0.04) !important;
-    border: 1px solid rgba(0,212,170,0.3) !important;
-    border-radius: 2px !important;
-    color: #cbd5e1 !important;
+    background: #fafaf9 !important;
+    border: 1px solid #d6d3cd !important;
+    border-radius: 6px !important;
+    color: #1c1917 !important;
 }
 
 /* ─── BOTÓN PREDECIR ─── */
 .stButton > button {
-    background: #00d4aa !important;
-    color: #060b18 !important;
-    border-radius: 2px !important;
+    background: #1c1917 !important;
+    color: #f4f3ef !important;
+    border-radius: 6px !important;
     padding: 0.8rem 2rem !important;
-    font-family: 'Syne', sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 0.82rem !important;
-    letter-spacing: 0.18em !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.06em !important;
     text-transform: uppercase !important;
     border: none !important;
-    box-shadow: 0 0 30px rgba(0,212,170,0.28) !important;
+    box-shadow: none !important;
     transition: all 0.2s ease !important;
     width: 100% !important;
 }
 
 .stButton > button:hover {
-    background: #00f0c2 !important;
-    box-shadow: 0 0 55px rgba(0,212,170,0.5) !important;
+    background: #292524 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.14) !important;
     transform: translateY(-1px) !important;
 }
 
 /* ─── RESULTADO ─── */
 .result-card {
-    background: rgba(8, 15, 32, 0.92);
+    background: #ffffff;
     padding: 2.5rem;
-    border-radius: 4px;
+    border-radius: 10px;
     text-align: center;
-    margin-top: 2rem;
-    box-shadow: 0 0 0 1px rgba(0,212,170,0.2), 0 24px 80px rgba(0,0,0,0.5);
-    border: 1px solid rgba(0,212,170,0.3);
-    animation: fadeInUp 0.45s ease;
+    margin-top: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+    border: 1px solid #e8e6e1;
+    animation: fadeInUp 0.4s ease;
     position: relative;
     overflow: hidden;
 }
@@ -203,66 +197,93 @@ div[data-baseweb="select"] > div {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #00d4aa 40%, transparent);
+    height: 3px;
+    background: #b45309;
+    opacity: 0.6;
 }
 
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(15px); }
+    from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
 .result-label {
-    color: rgba(0,212,170,0.6);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.22em;
+    color: #a8a29e;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
 }
 
 .cluster-badge {
     display: inline-block;
-    padding: 0.65rem 2.2rem;
-    border-radius: 2px;
-    background: transparent;
-    color: #00d4aa;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.55rem;
-    border: 1px solid #00d4aa;
-    box-shadow: 0 0 22px rgba(0,212,170,0.2), inset 0 0 20px rgba(0,212,170,0.05);
-    letter-spacing: 0.04em;
-    margin-top: 0.5rem;
+    padding: 0.6rem 2rem;
+    border-radius: 6px;
+    background: #1c1917;
+    color: #f4f3ef;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+    border: none;
+    box-shadow: none;
+    letter-spacing: 0.01em;
+    margin-top: 0.3rem;
 }
 
 /* ─── INFO BOX ─── */
 .stAlert {
-    background: rgba(0,212,170,0.05) !important;
-    color: rgba(226,232,240,0.75) !important;
-    border: 1px solid rgba(0,212,170,0.18) !important;
-    border-radius: 2px !important;
-    font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.82rem !important;
+    background: #fafaf9 !important;
+    color: #78716c !important;
+    border: 1px solid #e8e6e1 !important;
+    border-radius: 6px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.88rem !important;
 }
 
-/* ─── FOOTER ─── */
+//* ─── FOOTER ─── */
 .footer-text {
     text-align: center;
     margin-top: 3rem;
-    color: rgba(0,212,170,0.28);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+    color: #c8c4bd;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
 }
 
 /* ─── DIVIDER ─── */
 hr {
     border: none;
     height: 1px;
-    background: rgba(0,212,170,0.1);
+    background: #e8e6e1;
     margin: 2rem 0;
+}
+
+/* ─── GENERAL TEXT ─── */
+.stMarkdown p, .stMarkdown div {
+    color: #44403c;
+}y: 'DM Sans', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    margin-top: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.section-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #ede9e3;
+}
+
+.section-sep {
+    height: 1px;
+    background: #f0ede8;
+    margin: 1.4rem 0 1.0rem;
 }
 
 /* ─── GENERAL TEXT ─── */
@@ -277,7 +298,7 @@ hr {
 # ============================================================
 st.markdown("<h1 class='main-title'>Clasificador de Riesgo Actuarial</h1>", unsafe_allow_html=True)
 st.markdown("<div class='deco-line'></div>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>Richard Andino &nbsp;&middot;&nbsp; 20231900184</p>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>IA-ISC &nbsp;&middot;&nbsp; Angeles Euceda &nbsp;&middot;&nbsp; 20221930061 &nbsp;&middot;&nbsp; 2026</p>", unsafe_allow_html=True)
 
 
 
@@ -300,42 +321,50 @@ preprocessor, modelo = cargar_modelos()
 # ============================================================
 # TÍTULO DEL FORMULARIO AFUERA DEL CUADRO
 # ============================================================
-st.markdown("<div class='form-title-outside'>// datos del cliente</div>", unsafe_allow_html=True)
+st.markdown("<div class='form-title-outside'>Datos del cliente</div>", unsafe_allow_html=True)
 
 # ============================================================
 # FORMULARIO EN CUADRO BLANCO (sin título adentro)
 # ============================================================
 with st.container():
-    
 
-    col1, col2 = st.columns(2)
-
-    with col1:
-        age = st.number_input("Edad", 18, 100, 30)
-
-        sex = st.radio(
-            "Sexo",
-            ["male", "female"],
-            horizontal=True
+    # ── SECCIÓN 1: Perfil del asegurado
+    st.markdown("<div class='section-header'>// perfil del asegurado</div>", unsafe_allow_html=True)
+    col_a, col_b, col_c = st.columns([1.0, 1.1, 1.3])
+    with col_a:
+        age = st.number_input("Edad", 18, 100, 42)
+    with col_b:
+        sex = st.radio("Sexo", ["male", "female"], horizontal=True)
+    with col_c:
+        region = st.selectbox(
+            "Región",
+            ["southeast", "southwest", "northeast", "northwest"],
+            index=2
         )
 
-        bmi = st.number_input("BMI", 10.0, 60.0, 25.0)
+    st.markdown("<div class='section-sep'></div>", unsafe_allow_html=True)
 
-    with col2:
-        children = st.number_input("Hijos", 0, 10, 0)
-
+    # ── SECCIÓN 2: Indicadores de salud
+    st.markdown("<div class='section-header'>// indicadores de salud</div>", unsafe_allow_html=True)
+    col_d, col_e = st.columns([1.3, 1])
+    with col_d:
+        bmi = st.number_input("BMI", 10.0, 60.0, 31.5)
+    with col_e:
         smoker = st.radio(
             "Fumador",
             ["yes", "no"],
             horizontal=True
         )
 
-        region = st.selectbox(
-            "Región",
-            ["southeast", "southwest", "northeast", "northwest"]
-        )
+    st.markdown("<div class='section-sep'></div>", unsafe_allow_html=True)
 
-    charges = st.number_input("Gastos médicos", 0, 100000, 5000)
+    # ── SECCIÓN 3: Cobertura
+    st.markdown("<div class='section-header'>// cobertura</div>", unsafe_allow_html=True)
+    col_f, col_g = st.columns([1, 2.2])
+    with col_f:
+        children = st.number_input("Hijos", 0, 10, 2)
+    with col_g:
+        charges = st.number_input("Gastos médicos", 0, 100000, 18750)
 
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -368,7 +397,7 @@ if st.button("🔍 Predecir riesgo"):
 
     st.markdown(f"""
         <div class="result-card">
-            <div class="result-label">// análisis completado</div>
+            <div class="result-label">Resultado del análisis</div>
             <div class="cluster-badge">{resultado}</div>
         </div>
     """, unsafe_allow_html=True)
@@ -381,5 +410,6 @@ else:
 # ============================================================
 st.markdown("""
 <div class="footer-text">
+Sistema de Riesgo Actuarial con IA &nbsp;&middot;&nbsp; ISC 2026
 </div>
 """, unsafe_allow_html=True)   
