@@ -381,6 +381,5 @@ else:
 # ============================================================
 st.markdown("""
 <div class="footer-text">
-sistema de riesgo actuarial &nbsp;&middot;&nbsp; ia-isc 2026
 </div>
 """, unsafe_allow_html=True)   
