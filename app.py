@@ -9,190 +9,43 @@ import joblib
 # CONFIGURACIÓN
 # ============================================================
 st.set_page_config(
-    page_title="Sistema Inteligente de Riesgo",
-    page_icon="🛡️",
+    page_title="Predicción de Valor Cliente",
+    page_icon="💎",
     layout="centered",
     initial_sidebar_state="collapsed"
 )
 
 # ============================================================
-# CSS (FONDO AZUL + FORMULARIO EN CUADRO BLANCO)
+# CSS (FONDO VIOLETA + TARJETA MODERNA)
 # ============================================================
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-/* ─── FONDO AZUL DE TODA LA PÁGINA ─── */
-html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"] {
-    background: linear-gradient(135deg, #312e81 0%, #6d28d9 40%, #8b5cf6 100%) !important;
-    font-family: 'Poppins', sans-serif;
+html, body, [data-testid="stAppViewContainer"] {
+    background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 50%, #d500f9 100%) !important;
+    font-family: 'Inter', sans-serif;
 }
 
-[data-testid="stAppViewContainer"] {
-    background: linear-gradient(135deg, #312e81 0%, #6d28d9 40%, #8b5cf6 100%) !important;
-}
+.main-title { text-align: center; color: #ffffff; font-weight: 700; margin-bottom: 0.5rem; }
+.subtitle { text-align: center; color: #e1bee7; font-size: 1.1rem; }
+.form-title-outside { color: #ffffff; font-size: 1.4rem; font-weight: 600; text-align: center; margin: 1rem 0; }
 
-/* ─── TÍTULO ─── */
-.main-title {
-    text-align: center;
-    color: #ffffff;
-    font-size: 2.8rem;
-    font-weight: 700;
-    text-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    margin-bottom: 0.5rem;
-}
-
-.subtitle {
-    text-align: center;
-    color: #ddd6fe;
-    font-size: 1.1rem;
-    font-weight: 400;
-    margin-bottom: 2rem;
-}
-
-.description {
-    text-align: center;
-    color: #f5f3ff;
-    font-size: 1rem;
-    margin-bottom: 2.5rem;
-}
-
-/* ─── TÍTULO "DATOS DEL CLIENTE" FUERA DEL CUADRO ─── */
-.form-title-outside {
-    color: #ffffff;
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    text-align: center;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-/* ─── CUADRO DEL FORMULARIO (TARJETA BLANCA) ─── */
-.form-card {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2.5rem;
-    border-radius: 24px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    border: 2px solid rgba(255,255,255,0.3);
-    backdrop-filter: blur(10px);
-    margin-bottom: 2rem;
-}
-
-/* Labels de todos los inputs */
-.stNumberInput label,
-.stRadio label,
-.stSelectbox label,
-.stNumberInput > div > label,
-.stRadio > div > label,
-.stSelectbox > div > label,
-[data-testid="stNumberInput"] label,
-[data-testid="stRadio"] label,
-[data-testid="stSelectbox"] label {
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    font-size: 1rem !important;
-}
-
-/* Texto de los radio buttons (male, female, yes, no) */
-.stRadio [role="radiogroup"] label,
-.stRadio [data-testid="stMarkdownContainer"] p,
-.stRadio span[data-baseweb="radio"] div,
-.stRadio div[role="radio"] {
-    color: #ffffff !important;
-    font-weight: 600 !important;
-}
-
-/* Opciones del selectbox */
-.stSelectbox [data-testid="stMarkdownContainer"] p,
-.stSelectbox div[data-baseweb="select"] span {
-    color: #ffffff !important;
-}
-
-/* Input numbers */
-.stNumberInput input {
-    color: #333333 !important;
-    font-weight: 600 !important;
-    background: #f5f9ff !important;
-    border: 2px solid #ddd6fe !important;
-    border-radius: 12px !important;
-}
-
-/* Placeholder y texto dentro de inputs */
-.stNumberInput input::placeholder {
-    color: #999999 !important;
-}
-
-/* ─── BOTÓN PREDECIR ─── */
 .stButton > button {
-    background: linear-gradient(135deg, #6d28d9, #312e81) !important;
-    color: white !important;
-    border-radius: 14px !important;
-    padding: 0.8rem 2rem !important;
+    background: #ffffff !important;
+    color: #4a148c !important;
+    border-radius: 50px !important;
     font-weight: 700 !important;
-    font-size: 1.1rem !important;
-    border: none !important;
-    box-shadow: 0 8px 25px rgba(13, 71, 161, 0.4) !important;
-    transition: all 0.3s ease !important;
     width: 100% !important;
+    border: none !important;
 }
 
-.stButton > button:hover {
-    background: linear-gradient(135deg, #312e81, #1565c0) !important;
-    box-shadow: 0 12px 35px rgba(13, 71, 161, 0.6) !important;
-    transform: translateY(-2px) !important;
-}
-
-/* ─── RESULTADO ─── */
 .result-card {
-    background: linear-gradient(135deg, #ffffff, #f5f3ff);
-    padding: 2.5rem;
-    border-radius: 24px;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 20px;
     text-align: center;
-    margin-top: 2rem;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.25);
-    border: 2px solid rgba(255,255,255,0.5);
-    animation: fadeInUp 0.6s ease;
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-.cluster-badge {
-    display: inline-block;
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
-    background: linear-gradient(135deg, #6d28d9, #312e81);
-    color: white;
-    font-weight: bold;
-    font-size: 1.4rem;
-    box-shadow: 0 6px 20px rgba(13, 71, 161, 0.4);
-    margin-top: 1rem;
-}
-
-/* ─── INFO BOX ─── */
-.stAlert {
-    background: rgba(255,255,255,0.15) !important;
-    color: #f5f3ff !important;
-    border: 1px solid rgba(255,255,255,0.3) !important;
-    border-radius: 16px !important;
-}
-
-/* ─── FOOTER ─── */
-.footer-text {
-    text-align: center;
-    margin-top: 3rem;
-    color: rgba(255,255,255,0.7);
-    font-size: 0.9rem;
-}
-
-/* ─── DIVIDER ─── */
-hr {
-    border: none;
-    height: 1px;
-    background: rgba(255,255,255,0.2);
-    margin: 2rem 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 </style>
 """, unsafe_allow_html=True)
@@ -200,112 +53,59 @@ hr {
 # ============================================================
 # HEADER
 # ============================================================
-st.markdown("<h1 class='main-title'>🛡️ Sistema Inteligente de Evaluación de Riesgo</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>Machine Learning • Inteligencia Artificial • 2026</p>", unsafe_allow_html=True)
-
-
+st.markdown("<h1 class='main-title'>💎 Segmentación de Clientes</h1>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>IA-Analytics • Estrategia Comercial • 2026</p>", unsafe_allow_html=True)
 
 # ============================================================
-# MODELOS
+# CARGA DE MODELOS (Asume archivos renombrados si es necesario)
 # ============================================================
 MODEL_DIR = Path("models")
-
-PREPROCESSOR_PATH = MODEL_DIR / "preprocessor.pkl"
-KMEANS_PATH = MODEL_DIR / "kmeans_riesgo_actuarial.pkl"
-
 @st.cache_resource
 def cargar_modelos():
-    preprocessor = joblib.load(PREPROCESSOR_PATH)
-    kmeans = joblib.load(KMEANS_PATH)
-    return preprocessor, kmeans
+    preprocessor = joblib.load(MODEL_DIR / "preprocessor.pkl")
+    modelo = joblib.load(MODEL_DIR / "kmeans_clv.pkl") # Cambiado el nombre del archivo
+    return preprocessor, modelo
 
 preprocessor, modelo = cargar_modelos()
 
 # ============================================================
-# TÍTULO DEL FORMULARIO AFUERA DEL CUADRO
+# FORMULARIO
 # ============================================================
-st.markdown("<div class='form-title-outside'>📋 Información del solicitante</div>", unsafe_allow_html=True)
+st.markdown("<div class='form-title-outside'>⚙️ Parámetros de Fidelización</div>", unsafe_allow_html=True)
 
-# ============================================================
-# FORMULARIO EN CUADRO BLANCO (sin título adentro)
-# ============================================================
-with st.container():
-    
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        age = st.number_input("Edad del cliente", 18, 100, 30)
-
-        sex = st.radio(
-            "Género",
-            ["male", "female"],
-            horizontal=True
-        )
-
-        bmi = st.number_input("BMI", 10.0, 60.0, 25.0)
-
-    with col2:
-        children = st.number_input("Dependientes", 0, 10, 0)
-
-        smoker = st.radio(
-            "Consumo de tabaco",
-            ["yes", "no"],
-            horizontal=True
-        )
-
-        region = st.selectbox(
-            "Zona geográfica",
-            ["southeast", "southwest", "northeast", "northwest"]
-        )
-
-    charges = st.number_input("Costo médico anual", 0, 100000, 5000)
-
-    st.markdown("</div>", unsafe_allow_html=True)
+col1, col2 = st.columns(2)
+with col1:
+    tenure = st.number_input("Meses como cliente", 0, 120, 12)
+    frecuencia = st.number_input("Compras anuales", 0, 50, 5)
+with col2:
+    gasto_promedio = st.number_input("Ticket promedio ($)", 0, 10000, 100)
+    canal = st.selectbox("Canal de Adquisición", ["Social", "Email", "Direct", "Referido"])
 
 # ============================================================
 # PREDICCIÓN
 # ============================================================
-if st.button("🚀 Evaluar perfil"):
-
-    cliente = pd.DataFrame([{
-        "age": age,
-        "sex": sex,
-        "bmi": bmi,
-        "children": children,
-        "smoker": smoker,
-        "region": region,
-        "charges": charges
+if st.button("🚀 Analizar Segmento"):
+    # Asegúrate de que las columnas coincidan con el entrenamiento
+    input_data = pd.DataFrame([{
+        "tenure": tenure,
+        "frequency": frecuencia,
+        "avg_spend": gasto_promedio,
+        "channel": canal
     }])
 
-    X_transformed = preprocessor.transform(cliente)
+    X_transformed = preprocessor.transform(input_data)
     cluster = modelo.predict(X_transformed)[0]
 
-    interpretacion = {
-        0: "Riesgo Bajo 🟢",
-        1: "Riesgo Medio 🟡",
-        2: "Riesgo Alto 🔴",
-        3: "Riesgo Crítico ⚠️"
+    segmentos = {
+        0: "Clientes Ocasionales 🥉",
+        1: "Potencial de Crecimiento 🥈",
+        2: "Clientes Premium 🥇",
+        3: "Clientes VIP 💎"
     }
-
-    resultado = interpretacion.get(cluster, f"Cluster {cluster}")
 
     st.markdown(f"""
         <div class="result-card">
-            <div style="font-size:3.5rem; margin-bottom:0.5rem;">📊</div>
-            <div style="color:#312e81; font-size:1.2rem; font-weight:600; margin-bottom:0.5rem;">Resultado de la evaluación</div>
-            <div class="cluster-badge">{resultado}</div>
+            <h3>Segmento Identificado:</h3>
+            <h2 style="color:#4a148c;">{segmentos.get(cluster, 'Cliente Estándar')}</h2>
         </div>
     """, unsafe_allow_html=True)
-
-else:
-    st.info("Ingrese los datos del cliente y presione **Predecir riesgo**")
-
-# ============================================================
-# FOOTER
-# ============================================================
-st.markdown("""
-<div class="footer-text">
-📊 Plataforma de Clasificación de Riesgo • Machine Learning • 2026
-</div>
-""", unsafe_allow_html=True)   
