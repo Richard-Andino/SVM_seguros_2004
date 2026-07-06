@@ -9,103 +9,104 @@ import joblib
 # CONFIGURACIÓN
 # ============================================================
 st.set_page_config(
-    page_title="Predicción de Valor Cliente",
-    page_icon="💎",
-    layout="centered",
-    initial_sidebar_state="collapsed"
+    page_title="Risk Analytics System",
+    page_icon="🛡️",
+    layout="centered"
 )
 
 # ============================================================
-# CSS (FONDO VIOLETA + TARJETA MODERNA)
+# CSS (ESTÉTICA DARK MODERNA)
 # ============================================================
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-
-html, body, [data-testid="stAppViewContainer"] {
-    background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 50%, #d500f9 100%) !important;
-    font-family: 'Inter', sans-serif;
-}
-
-.main-title { text-align: center; color: #ffffff; font-weight: 700; margin-bottom: 0.5rem; }
-.subtitle { text-align: center; color: #e1bee7; font-size: 1.1rem; }
-.form-title-outside { color: #ffffff; font-size: 1.4rem; font-weight: 600; text-align: center; margin: 1rem 0; }
-
-.stButton > button {
-    background: #ffffff !important;
-    color: #4a148c !important;
-    border-radius: 50px !important;
-    font-weight: 700 !important;
-    width: 100% !important;
-    border: none !important;
-}
-
-.result-card {
-    background: #ffffff;
-    padding: 2rem;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
+    .stApp { background-color: #0b0e14; color: #e0e0e0; }
+    .main-title { color: #00f2ff; text-align: center; font-size: 2.5rem; font-weight: 800; }
+    .subtitle { color: #888; text-align: center; margin-bottom: 2rem; }
+    .form-card { background: #161b22; padding: 2rem; border-radius: 15px; border: 1px solid #30363d; }
+    .stButton > button { 
+        width: 100%; background: #00f2ff; color: #000; font-weight: bold; border-radius: 8px; border: none; 
+    }
+    .result-box { background: #1c2128; padding: 2rem; border-radius: 15px; border: 1px solid #00f2ff; text-align: center; margin-top: 2rem; }
 </style>
 """, unsafe_allow_html=True)
 
 # ============================================================
 # HEADER
 # ============================================================
-st.markdown("<h1 class='main-title'>💎 Segmentación de Clientes</h1>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>IA-Analytics • Estrategia Comercial • 2026</p>", unsafe_allow_html=True)
+st.markdown("<h1 class='main-title'>🛡️ Risk Analytics</h1>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>Sistema de Clasificación Actuarial v2026</p>", unsafe_allow_html=True)
 
 # ============================================================
-# CARGA DE MODELOS (Asume archivos renombrados si es necesario)
+# MODELOS (Lógica 100% intacta)
 # ============================================================
 MODEL_DIR = Path("models")
+PREPROCESSOR_PATH = MODEL_DIR / "preprocessor.pkl"
+KMEANS_PATH = MODEL_DIR / "kmeans_riesgo_actuarial.pkl"
+
 @st.cache_resource
 def cargar_modelos():
-    preprocessor = joblib.load(MODEL_DIR / "preprocessor.pkl")
-    modelo = joblib.load(MODEL_DIR / "kmeans_clv.pkl") # Cambiado el nombre del archivo
-    return preprocessor, modelo
+    preprocessor = joblib.load(PREPROCESSOR_PATH)
+    kmeans = joblib.load(KMEANS_PATH)
+    return preprocessor, kmeans
 
 preprocessor, modelo = cargar_modelos()
 
 # ============================================================
-# FORMULARIO
+# FORMULARIO (Estructura intacta)
 # ============================================================
-st.markdown("<div class='form-title-outside'>⚙️ Parámetros de Fidelización</div>", unsafe_allow_html=True)
+with st.container():
+    st.markdown("<div class='form-card'>", unsafe_allow_html=True)
+    col1, col2 = st.columns(2)
 
-col1, col2 = st.columns(2)
-with col1:
-    tenure = st.number_input("Meses como cliente", 0, 120, 12)
-    frecuencia = st.number_input("Compras anuales", 0, 50, 5)
-with col2:
-    gasto_promedio = st.number_input("Ticket promedio ($)", 0, 10000, 100)
-    canal = st.selectbox("Canal de Adquisición", ["Social", "Email", "Direct", "Referido"])
+    with col1:
+        age = st.number_input("Edad", 18, 100, 30)
+        sex = st.radio("Sexo", ["male", "female"], horizontal=True)
+        bmi = st.number_input("BMI", 10.0, 60.0, 25.0)
+
+    with col2:
+        children = st.number_input("Hijos", 0, 10, 0)
+        smoker = st.radio("Fumador", ["yes", "no"], horizontal=True)
+        region = st.selectbox("Región", ["southeast", "southwest", "northeast", "northwest"])
+
+    charges = st.number_input("Gastos médicos", 0, 100000, 5000)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # ============================================================
-# PREDICCIÓN
+# PREDICCIÓN (Lógica de inferencia intacta)
 # ============================================================
-if st.button("🚀 Analizar Segmento"):
-    # Asegúrate de que las columnas coincidan con el entrenamiento
-    input_data = pd.DataFrame([{
-        "tenure": tenure,
-        "frequency": frecuencia,
-        "avg_spend": gasto_promedio,
-        "channel": canal
+if st.button("🔍 Procesar Análisis"):
+    cliente = pd.DataFrame([{
+        "age": age,
+        "sex": sex,
+        "bmi": bmi,
+        "children": children,
+        "smoker": smoker,
+        "region": region,
+        "charges": charges
     }])
 
-    X_transformed = preprocessor.transform(input_data)
+    X_transformed = preprocessor.transform(cliente)
     cluster = modelo.predict(X_transformed)[0]
 
-    segmentos = {
-        0: "Clientes Ocasionales 🥉",
-        1: "Potencial de Crecimiento 🥈",
-        2: "Clientes Premium 🥇",
-        3: "Clientes VIP 💎"
+    interpretacion = {
+        0: "Riesgo Bajo 🟢",
+        1: "Riesgo Medio 🟡",
+        2: "Riesgo Alto 🔴",
+        3: "Riesgo Crítico ⚠️"
     }
 
+    resultado = interpretacion.get(cluster, f"Cluster {cluster}")
+
     st.markdown(f"""
-        <div class="result-card">
-            <h3>Segmento Identificado:</h3>
-            <h2 style="color:#4a148c;">{segmentos.get(cluster, 'Cliente Estándar')}</h2>
+        <div class="result-box">
+            <h3 style="color: #00f2ff;">Resultado del análisis</h3>
+            <p style="font-size: 1.8rem; font-weight: bold;">{resultado}</p>
         </div>
     """, unsafe_allow_html=True)
+else:
+    st.info("Ingrese los datos y presione el botón para comenzar.")
+
+# ============================================================
+# FOOTER
+# ============================================================
+st.markdown("<div class='subtitle' style='margin-top:2rem;'>© 2026 ISC - Angeles Euceda</div>", unsafe_allow_html=True)
