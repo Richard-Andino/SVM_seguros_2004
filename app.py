@@ -277,7 +277,7 @@ hr {
 # ============================================================
 st.markdown("<h1 class='main-title'>Clasificador de Riesgo Actuarial</h1>", unsafe_allow_html=True)
 st.markdown("<div class='deco-line'></div>", unsafe_allow_html=True)
-st.markdown("<p class='subtitle'>Richard Andino &nbsp;&middot;&nbsp; 20231900184 &nbsp;&middot;&nbsp</p>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>Richard Andino &nbsp;&middot;&nbsp; 20231900184</p>", unsafe_allow_html=True)
 
 
 
