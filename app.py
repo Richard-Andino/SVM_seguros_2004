@@ -329,7 +329,7 @@ st.markdown("<div class='form-title-outside'>Datos del cliente</div>", unsafe_al
 with st.container():
 
     # ── SECCIÓN 1: Perfil del asegurado
-    st.markdown("<div class='section-header'>// perfil del asegurado</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-header'>Perfil del asegurado</div>", unsafe_allow_html=True)
     col_a, col_b, col_c = st.columns([1.0, 1.1, 1.3])
     with col_a:
         age = st.number_input("Edad", 18, 100, 42)
@@ -345,7 +345,7 @@ with st.container():
     st.markdown("<div class='section-sep'></div>", unsafe_allow_html=True)
 
     # ── SECCIÓN 2: Indicadores de salud
-    st.markdown("<div class='section-header'>// indicadores de salud</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-header'>Indicadores de salud</div>", unsafe_allow_html=True)
     col_d, col_e = st.columns([1.3, 1])
     with col_d:
         bmi = st.number_input("BMI", 10.0, 60.0, 31.5)
@@ -359,7 +359,7 @@ with st.container():
     st.markdown("<div class='section-sep'></div>", unsafe_allow_html=True)
 
     # ── SECCIÓN 3: Cobertura
-    st.markdown("<div class='section-header'>// cobertura</div>", unsafe_allow_html=True)
+    st.markdown("<div class='section-header'>Cobertura</div>", unsafe_allow_html=True)
     col_f, col_g = st.columns([1, 2.2])
     with col_f:
         children = st.number_input("Hijos", 0, 10, 2)
@@ -410,6 +410,5 @@ else:
 # ============================================================
 st.markdown("""
 <div class="footer-text">
-Sistema de Riesgo Actuarial con IA &nbsp;&middot;&nbsp; ISC 2026
 </div>
 """, unsafe_allow_html=True)   
